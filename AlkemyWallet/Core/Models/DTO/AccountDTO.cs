@@ -1,30 +1,35 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using AlkemyWallet.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace AlkemyWallet.Core.Models
+namespace AlkemyWallet.Core.Models;
+
+public class AccountForShowDTO
 {
-    [Table("AccountDTO")]
-    public class AccountDTO
-    {
+    public int Id { get; set; }
+    public float Money { get; set; } = 0f;
 
-        [Key]
-        public int Id { get; set; }
+    public int User_id { get; set; } = 0;
+}
 
-        [Required(ErrorMessage = "el campo es requerido")]
-        public DateTime CreationDate { get; set; }
+public class AccountForCreationDTO
+{
+    [Required(ErrorMessage = "A Creation Date is Required")]
+    public DateTime CreationDate { get; set; }
 
-        [Required(ErrorMessage = "el campo es requerido")]
-        public float Money { get; set; }
+    [Required(ErrorMessage = "An Amount its Required")]
+    public float Money { get; set; }
 
-        [Required(ErrorMessage = "el campo es requerido")]
+    [Required(ErrorMessage = "User Id is Required")]
+    public int User_id { get; set; }
+}
 
-        public bool IsBlocked { get; set; }
+public class AccountForUpdateDTO
+{
+    [Required(ErrorMessage = "A Creation Date is Required")]
+    public DateTime? CreationDate { get; set; }
 
-        public int User_id { get; set; }
-        [ForeignKey("User_id")]
-        public User? User { get; set; }
+    [Required(ErrorMessage = "An Amount its Required")]
+    public float? Money { get; set; }
 
-        public ICollection<FixedTermDepositDTO>? FixedTermDeposit { get; set; }
-    }
+    [Required(ErrorMessage = "User Id is Required")]
+    public int? User_id { get; set; }
 }
